@@ -14,11 +14,12 @@
         <module>report-domain</module>
         <module>report-api</module>
         <module>report-processor</module>
+        <module>report-application</module>
     </modules>
 
     <properties>
         <java.version>21</java.version>
-        <spring.boot.version>3.2.5</spring.boot.version>
+        <spring.boot.version>4.0.3</spring.boot.version>
     </properties>
 
     <dependencyManagement>
