@@ -12,6 +12,22 @@ public class Report {
     private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    private Report(
+            UUID id,
+            String name,
+            ReportType type,
+            ReportStatus status,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt
+    ) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public Report(String name, ReportType type) {
         this.id = UUID.randomUUID();
         this.name = name;
@@ -46,6 +62,17 @@ public class Report {
 
         this.status = ReportStatus.FAILED;
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public static Report restore(
+            UUID id,
+            String name,
+            ReportType type,
+            ReportStatus status,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt
+    ) {
+        return new Report(id, name, type, status, createdAt, updatedAt);
     }
 
     public UUID getId() {
