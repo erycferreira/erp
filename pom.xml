@@ -15,6 +15,7 @@
         <module>report-api</module>
         <module>report-processor</module>
         <module>report-application</module>
+        <module>report-infra</module>
     </modules>
 
     <properties>

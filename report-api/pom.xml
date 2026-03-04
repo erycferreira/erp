@@ -36,6 +36,11 @@
         </dependency>
         <dependency>
             <groupId>com.erycferreira.enterprise</groupId>
+            <artifactId>report-infra</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.erycferreira.enterprise</groupId>
             <artifactId>report-application</artifactId>
             <version>${project.version}</version>
         </dependency>
