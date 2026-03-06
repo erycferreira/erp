@@ -1,11 +1,14 @@
 package com.erycferreira.enterprise.api.exception;
 
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
@@ -70,6 +73,32 @@ public class GlobalExceptionHandler {
     problem.setInstance(URI.create(request.getRequestURI()));
 
     problem.setProperty("errorCode", ErrorCode.INTERNAL_ERROR.name());
+    problem.setProperty("correlationId", UUID.randomUUID().toString());
+
+    return ResponseEntity.status(status).body(problem);
+  }
+
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  public ResponseEntity<ProblemDetail> handleValidation(
+      MethodArgumentNotValidException ex,
+      HttpServletRequest request) {
+
+    HttpStatus status = HttpStatus.UNPROCESSABLE_CONTENT;
+
+    List<String> errors = ex.getBindingResult()
+        .getFieldErrors()
+        .stream()
+        .map(error -> error.getField() + ": " + error.getDefaultMessage())
+        .toList();
+
+    ProblemDetail problem = ProblemDetail.forStatus(status);
+
+    problem.setTitle("Validation Error");
+    problem.setDetail("Failure to validate");
+    problem.setInstance(URI.create(request.getRequestURI()));
+
+    problem.setProperty("errors", errors);
+    problem.setProperty("errorCode", ErrorCode.VALIDATION_ERROR.name());
     problem.setProperty("correlationId", UUID.randomUUID().toString());
 
     return ResponseEntity.status(status).body(problem);
