@@ -2,6 +2,8 @@ package com.erycferreira.enterprise.api.controller;
 
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +29,7 @@ public class ReportController {
   private final CreateReportUseCase createUseCase;
   private final StartReportProcessingUseCase startUseCase;
   private final ReportMapper mapper;
+  private final static Logger log = LoggerFactory.getLogger(ReportController.class);
 
   public ReportController(
       CreateReportUseCase createUseCase,
@@ -44,6 +47,8 @@ public class ReportController {
     Report report = createUseCase.execute(
         request.name(),
         ReportType.valueOf(request.type()));
+
+    log.info("Creating report name={} type={}", request.name(), request.type());
 
     return mapper.toResponse(report);
   }
