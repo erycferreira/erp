@@ -2,6 +2,18 @@ version: '3.8'
 
 services:
 
+  report-api:
+    build: .
+    container_name: report-api
+    environment:
+      DB_URL: ${POSTGRES_URL}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASS: ${POSTGRES_PASSWORD}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres:18
     container_name: report-postgres
