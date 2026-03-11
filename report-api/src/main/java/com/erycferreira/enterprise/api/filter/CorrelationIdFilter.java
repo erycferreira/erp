@@ -1,4 +1,4 @@
-package com.erycferreira.enterprise.api.infrastructure.web.filter;
+package com.erycferreira.enterprise.api.filter;
 
 import java.io.IOException;
 import java.util.UUID;

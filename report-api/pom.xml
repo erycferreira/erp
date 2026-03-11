@@ -57,7 +57,7 @@
         <dependency>
             <groupId>com.erycferreira.enterprise</groupId>
             <artifactId>report-domain</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.erycferreira.enterprise</groupId>

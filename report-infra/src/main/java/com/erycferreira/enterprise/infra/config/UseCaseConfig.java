@@ -1,4 +1,4 @@
-package com.erycferreira.enterprise.api.config;
+package com.erycferreira.enterprise.infra.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
