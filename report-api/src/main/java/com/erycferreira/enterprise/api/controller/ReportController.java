@@ -19,6 +19,7 @@ import com.erycferreira.enterprise.application.usecase.StartReportProcessingUseC
 import com.erycferreira.enterprise.domain.model.Report;
 import com.erycferreira.enterprise.domain.model.ReportType;
 
+import io.opentelemetry.instrumentation.annotations.WithSpan;
 import jakarta.validation.Valid;
 
 @RestController
@@ -41,6 +42,7 @@ public class ReportController {
   }
 
   @PostMapping
+  @WithSpan("create-report-endpoint")
   public ReportResponse create(
       @Valid @RequestBody CreateReportRequest request) {
 
