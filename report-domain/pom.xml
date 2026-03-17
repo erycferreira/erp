@@ -8,5 +8,11 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>report-domain</artifactId>
 
-    <dependencies />
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
