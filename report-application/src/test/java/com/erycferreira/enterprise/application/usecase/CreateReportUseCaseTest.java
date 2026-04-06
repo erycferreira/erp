@@ -7,12 +7,15 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.erycferreira.enterprise.application.port.ReportEventPort;
 import com.erycferreira.enterprise.domain.model.Report;
 import com.erycferreira.enterprise.domain.model.ReportStatus;
 import com.erycferreira.enterprise.domain.model.ReportType;
@@ -23,6 +26,9 @@ class CreateReportUseCaseTest {
 
   @Mock
   private ReportRepository repository;
+
+  @Mock
+  private ReportEventPort eventPort;
 
   @InjectMocks
   private CreateReportUseCase useCase;
@@ -36,6 +42,7 @@ class CreateReportUseCaseTest {
 
     assertNotNull(result);
     assertEquals(ReportStatus.CREATED, result.getStatus());
+    verify(eventPort, times(1)).reportCreated(any(UUID.class));
     verify(repository, times(1)).save(any(Report.class));
   }
 }

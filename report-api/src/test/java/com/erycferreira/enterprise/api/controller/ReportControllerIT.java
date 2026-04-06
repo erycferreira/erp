@@ -43,7 +43,7 @@ class ReportControllerIT {
         .get("id")
         .asText();
 
-    mockMvc.perform(get("/reports" + id))
+    mockMvc.perform(get("/reports/" + id))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.id").value(id))
         .andExpect(jsonPath("$.status").value("CREATED"));
@@ -51,7 +51,7 @@ class ReportControllerIT {
 
   @Test
   void shouldReturn404WhenReportNotFound() throws Exception {
-    mockMvc.perform(get("reports" + UUID.randomUUID()))
+    mockMvc.perform(get("/reports/" + UUID.randomUUID()))
         .andExpect(status().isNotFound());
   }
 

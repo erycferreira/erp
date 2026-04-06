@@ -4,13 +4,23 @@ services:
     build: .
     container_name: report-api
     environment:
-      DB_URL: ${POSTGRES_URL}
-      DB_USER: ${POSTGRES_USER}
-      DB_PASS: ${POSTGRES_PASSWORD}
+      - .env
     ports:
       - "8080:8080"
     depends_on:
       - postgres
+      - rabbitmq
+
+  report-processor:
+    build:
+      context: .
+      dockerfile: Dockerfile.processor
+    container_name: report-processor
+    environment:
+      - .env
+    depends_on:
+      - postgres
+      - rabbitmq
 
   postgres:
     image: postgres:18

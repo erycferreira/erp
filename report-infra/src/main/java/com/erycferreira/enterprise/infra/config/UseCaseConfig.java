@@ -3,9 +3,10 @@ package com.erycferreira.enterprise.infra.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.erycferreira.enterprise.application.port.ReportEventPort;
 import com.erycferreira.enterprise.application.usecase.CreateReportUseCase;
 import com.erycferreira.enterprise.application.usecase.GetReportUseCase;
-import com.erycferreira.enterprise.application.usecase.StartReportProcessingUseCase;
+import com.erycferreira.enterprise.application.usecase.ProcessReportUseCase;
 import com.erycferreira.enterprise.domain.repository.ReportRepository;
 
 @Configuration
@@ -17,12 +18,12 @@ public class UseCaseConfig {
   }
 
   @Bean
-  public CreateReportUseCase createReportUseCase(ReportRepository repository) {
-    return new CreateReportUseCase(repository);
+  public CreateReportUseCase createReportUseCase(ReportRepository repository, ReportEventPort eventPort) {
+    return new CreateReportUseCase(repository, eventPort);
   }
 
   @Bean
-  public StartReportProcessingUseCase startReportProcessingUseCase(ReportRepository repository) {
-    return new StartReportProcessingUseCase(repository);
+  public ProcessReportUseCase processReportUseCase(ReportRepository repository) {
+    return new ProcessReportUseCase(repository);
   }
 }
